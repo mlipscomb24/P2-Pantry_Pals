@@ -1,2 +1,3 @@
 # P2-News-for-You
-Project 2 
+
+Project 2
