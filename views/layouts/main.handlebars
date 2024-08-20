@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your App Name</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center; /* Center the image */
+            align-items: center;
+            margin: 2rem auto;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%; /* Make the image take up the full width of the container */
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                 <a class="button button-custom" href="/">Home</a>
+                 <a class="button button-custom" href="/login">Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        {{{body}}}
+        
+        <section class="section">
+            <div class="container">
+                <div class="image-container">
+                    <img src="/assets/food_image.png" alt="Image 1">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/signup.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+</html>
