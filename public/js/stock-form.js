@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
     });
     
-    $(document).on('click', '.add_field', function() {
-      $('<div class="input-group"><input type="email" class="input" name="email[]" value="" placeholder="Your email"><input type="password" class="input" name="password[]" value="" placeholder="Your password"></div>').insertAfter('.input-group:last');
+    // $(document).on('click', '.add_field', function() {
+    //  $('<div class="input-group"><input type="email" class="input" name="email[]" value="" placeholder="Your email"><input type="password" class="input" name="password[]" value="" placeholder="Your password"></div>').insertAfter('.input-group:last');
 })
 });
