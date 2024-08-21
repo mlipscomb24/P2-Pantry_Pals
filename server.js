@@ -28,5 +28,6 @@ app.use(
 app.use(routes);
 
 app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`),
+  console.log(`
+Server running locally at http://localhost:${PORT} and on the web https://p2-expiration-help.onrender.com`),
 );

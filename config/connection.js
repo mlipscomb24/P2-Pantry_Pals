@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize;
-
+// Web sequelize for render deployment
 if (process.env.DB_URL) {
   sequelize = new Sequelize(process.env.DB_URL, {
     dialect: 'postgres',
@@ -14,6 +14,7 @@ if (process.env.DB_URL) {
     },
   });
 } else {
+  // Local sequlize for render deployment
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
