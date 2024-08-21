@@ -3,6 +3,7 @@ const session = require('express-session');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const routes = require('./controllers');
+const sequelize = require('./config/connection'); // Make sure this path is correct
 require('dotenv').config();
 
 const app = express();
@@ -27,6 +28,14 @@ app.use(
 
 app.use(routes);
 
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`),
-);
+// Sync sequelize models to the database, then start the server
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    app.listen(PORT, () =>
+      console.log(`Server running on http://localhost:${PORT}`),
+    );
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
