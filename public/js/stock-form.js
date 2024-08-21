@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const stockForm = document.getElementById('stock-form');
-    const addButton = document.querySelector('button.add-input') 
+    const addButton = document.querySelector('button.add-input'); 
+    const inputDiv = document.querySelector('form.input');
     
     stockForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -11,13 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     });
     //Add more items button
-    document.querySelector('addButton').addEventListener('click', () => {
-        let field = document.createElement('stockForm');
-        document.querySelector('stockForm').insertBefore(field, document.querySelector('form:last-child'))};
-    
+    addButton.addEventListener('click', ()=>{ // button to add the inputs
+        let newInput = document.createElement('stockForm'); 
+
+        inputDiv.appendChild(newInput)
+
+    });
+
     
     if (item && icon && date) {
-    const response = await fetch('api/stock', {
+    const response = await fetch('api/dashboard', {
     method: 'POST', 
     body: JSON.stringify({ item, icon, date }), 
     })};
@@ -25,12 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (response.ok) {
     document.location.replace('/dashboard'); 
     } else {
-    alert ('Failed to add item.'); 
-    }
-    {
-    });
+    alert ('Failed to add item(s).'); 
+
+    }});
     
-    $(document).on('click', '.add_field', function() {
-      $('<div class="input-group"><input type="email" class="input" name="email[]" value="" placeholder="Your email"><input type="password" class="input" name="password[]" value="" placeholder="Your password"></div>').insertAfter('.input-group:last');
-})
-});

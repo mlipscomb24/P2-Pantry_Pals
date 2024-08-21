@@ -1,4 +1,4 @@
-<form action = "api/stock" method="POST">
+<form id= "stock-form" class="input" action = "api/stock" method="POST">
 
 <label for="add-items"> Add Items: </label>
 <div class="control">
@@ -25,9 +25,17 @@
 
 </select>
 <label for="date"> Expiration Date: </label>
-<input type="date" id="expiration"></input>
+<input type="date" id="datepicker"/>
+<script>  $("#datePicker").datePicker({
+        
+        value: new Date(2024, 0, 3),
+        format: "yyyy-MM-dd"
+    }); 
+    </script>
 
- <button> Add More <a href=""</button>
+</input>
+
+ <button class="add-input"> Add More </button>
 
 </div>
 <button type="submit">Submit</button>
