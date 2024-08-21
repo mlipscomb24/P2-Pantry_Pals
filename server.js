@@ -28,21 +28,15 @@ app.use(
 
 app.use(routes);
 
-<<<<<<< HEAD
-app.listen(PORT, () =>
-  console.log(`
-Server running locally at http://localhost:${PORT} and on the web https://p2-expiration-help.onrender.com`),
-);
-=======
 // Sync sequelize models to the database, then start the server
 sequelize
   .sync({ force: false })
   .then(() => {
     app.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`),
+      console.log(`
+      Server running locally at http://localhost:${PORT} and on the web https://p2-expiration-help.onrender.com`),
     );
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
->>>>>>> main
