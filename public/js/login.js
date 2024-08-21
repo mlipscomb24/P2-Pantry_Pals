@@ -8,16 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = document.getElementById('password').value.trim();
 
     if (email && password) {
-      const response = await fetch('/api/users/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+      try {
+        const response = await fetch('/api/users/login', {
+          method: 'POST',
+          body: JSON.stringify({ email, password }),
+          headers: { 'Content-Type': 'application/json' },
+        });
 
-      if (response.ok) {
-        document.location.replace('/dashboard');
-      } else {
-        alert('Failed to log in.');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.redirect) {
+            document.location.replace(data.redirect);
+          } else {
+            document.location.replace('/dashboard');
+          }
+        } else {
+          const errorData = await response.json();
+          alert(errorData.message || 'Failed to log in.');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred during login. Please try again.');
       }
     }
   });
