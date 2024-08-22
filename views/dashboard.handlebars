@@ -34,10 +34,73 @@
                 <div class="box">
                     <h2 class="title is-4">Actions</h2>
                     <div class="buttons">
-                        <a href="/add-item" class="button is-primary">Add New Item</a>
+                        <button data-target="modal-js" class="button is-primary js-modal-trigger">Add New Item</button>
                     </div>
                 </div>
+        {{!-- Modal for stock form --}}
+                <div id="modal-js" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"> Add Items </p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      {{!-- // Stock form  --}}
+<form id= "stock-form" class="input" action = "api/stock" method="POST">
+
+<label for="add-items"> Add Items: </label>
+<div class="control">
+  <input class="input" type="text" placeholder="Enter Item" />
+</div>
+
+<div class="select">
+<label> Select Icon </label>
+  <select>
+    <option> Icon </option>
+    <option> <i class="fa-solid fa-apple-whole"></i> </option>
+    <option> <i class="fa-solid fa-carrot"></i> </option>
+    <option> <i class="fa-solid fa-pepper-hot"></i> </option>
+    <option> <i class="fa-solid fa-fish"></i> </option>
+    <option> <i class="fa-solid fa-cheese"></i> </option>
+	<option> <i class="fa-solid fa-egg"></i> </option>
+	<option> <i class="fa-solid fa-bread-slice"></i> </option>
+	<option> <i class="fa-solid fa-bacon"></i> </option>
+	<option> <i class="fa-solid fa-pizza-slice"></i> </option>
+	<option> <i class="fa-solid fa-seedling"></i> </option>
+	<option> <i class="fa-solid fa-cookie"></i> </option>
+	<option> <i class="fa-solid fa-bowl-rice"></i> </option>
+	<option> <i class="fa-solid fa-bottle-droplet"></i> </option>
+
+</select>
+<label for="date"> Expiration Date: </label>
+<input type="date" id="datepicker"/>
+<script>  $("#datePicker").datePicker({
+        
+        value: new Date(2024, 0, 3),
+        format: "yyyy-MM-dd"
+    }); 
+    </script>
+
+</input>
+
+ <button class="add-input"> Add More </button>
+
+</div>
+<button type="submit">Submit</button>
+</form>
+
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </div>
+    </footer>
+  </div>
+</div>
             </div>
         </div>
     </div>
 </section>
+<script src='/js/stock-form.js'></script>
