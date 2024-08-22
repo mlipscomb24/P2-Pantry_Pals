@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+        const modalTriggers = document.querySelectorAll('.js-modal-trigger');
+        const modal = document.querySelector('#modal-js');
+        const closeModal = modal.querySelector('.delete');
+      
+        modalTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            modal.classList.add('is-active');
+          });
+        });
+      
+        closeModal.addEventListener('click', () => {
+          modal.classList.remove('is-active');
+        });
+      
     const stockForm = document.getElementById('stock-form');
     const addButton = document.querySelector('button.add-input'); 
     const inputDiv = document.querySelector('form.input');
