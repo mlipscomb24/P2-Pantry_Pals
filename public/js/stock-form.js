@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     if (item && icon && date) {
-    const response = await fetch('api/dashboard', {
+    const response = fetch('api/dashboard', {
     method: 'POST', 
     body: JSON.stringify({ item, icon, date }), 
     })};
