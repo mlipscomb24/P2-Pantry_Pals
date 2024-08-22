@@ -1,66 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your App Name</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
-    <script> $( function() {$( "#datepicker" ).datepicker();} ); </script>
-    
-    
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Pantry Pals</title>
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css'
+    />
+    <link rel='stylesheet' href='/css/style.css' />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'
+      rel='stylesheet'
+    />
+
     <style>
-        .image-container {
-            display: flex;
-            justify-content: center; /* Center the image */
-            align-items: center;
-            margin: 2rem auto;
-            max-width: 900px;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .image-container img {
-            width: 100%; /* Make the image take up the full width of the container */
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+      .image-container { display: flex; justify-content: center; align-items:
+      center; margin: 2rem auto; max-width: 900px; padding: 20px;
+      background-color: #f5f5f5; border-radius: 8px; box-shadow: 0 4px 8px
+      rgba(0, 0, 0, 0.1); } .image-container img { width: 100%; height: auto;
+      border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transition:
+      transform 0.3s ease; }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-menu">
-                <div class="navbar-start">
-                 <a class="button button-custom" href="/">Home</a>
-                 <a class="button button-custom" href="/login">Login</a>
-                </div>
+      <nav class='navbar' role='navigation' aria-label='main navigation'>
+        <div class='navbar-menu'>
+          <div class='navbar-start'>
+            <a class='navbar-item' href='/'>Home</a>
+            {{#if logged_in}}
+              <a class='navbar-item' href='/dashboard'>Dashboard</a>
+            {{/if}}
+          </div>
+          <div class='navbar-end'>
+            <div class='navbar-item'>
+              <div class='buttons'>
+                {{#if logged_in}}
+                  <a class='button is-light' href='/logout'>Logout</a>
+                {{else}}
+                  <a class='button is-primary' href='/signup'>
+                    <strong>Sign up</strong>
+                  </a>
+                  <a class='button is-light' href='/login'>
+                    Log in
+                  </a>
+                {{/if}}
+              </div>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
-    
+
     <main>
-        {{{body}}}
-        
-        <section class="section">
-            <div class="container">
-                <div class="image-container">
-                    <img src="/assets/food_image.png" alt="Image 1">
-                </div>
-            </div>
-        </section>
+      {{{body}}}
+
+      <section class='section'>
+        <div class='container'>
+          <div class='image-container'>
+            <img src='/assets/food_image.png' alt='Image 1' />
+          </div>
+        </div>
+      </section>
     </main>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/signup.js"></script>
-    <script src="/js/login.js"></script>
-    
-</body>
+    <script src='/js/main.js'></script>
+    <script src='/js/signup.js'></script>
+    <script src='/js/login.js'></script>
+  </body>
 </html>

@@ -9,16 +9,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = document.getElementById('password').value.trim();
 
     if (name && email && password) {
-      const response = await fetch('/api/users/signup', {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+      try {
+        const response = await fetch('/api/users/signup', {
+          method: 'POST',
+          body: JSON.stringify({ name, email, password }),
+          headers: { 'Content-Type': 'application/json' },
+        });
 
-      if (response.ok) {
-        document.location.replace('/dashboard');
-      } else {
-        alert('Failed to sign up.');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.redirect) {
+            document.location.replace(data.redirect);
+          } else {
+            document.location.replace('/dashboard');
+          }
+        } else {
+          const errorData = await response.json();
+          console.error('Signup error:', errorData);
+          alert(
+            errorData.message ||
+              'Failed to sign up. Please check the console for more details.',
+          );
+        }
+      } catch (error) {
+        console.error('Signup error:', error);
+        alert(
+          'An error occurred during signup. Please check the console for more details.',
+        );
       }
     }
   });

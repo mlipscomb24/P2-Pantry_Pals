@@ -1,0 +1,43 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">Welcome to Your Dashboard, {{username}}!</h1>
+
+        <div class="columns">
+            <div class="column is-one-quarter">
+                <div class="box">
+                    <figure class="image is-128x128 mb-4">
+                        <img src="https://api.dicebear.com/6.x/adventurer/svg?seed={{username}}" alt="{{username}}'s avatar" class="is-rounded">
+                    </figure>
+                    <p class="title is-5">{{username}}</p>
+                    <p class="subtitle is-6">{{email}}</p>
+                    <p>Member since: {{memberSince}}</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box">
+                    <h2 class="title is-4">Your Stats</h2>
+                    <p>Total Items: {{totalItems}}</p>
+                    <p>Last Login: {{lastLogin}}</p>
+                </div>
+                <div class="box">
+                    <h2 class="title is-4">Your Items</h2>
+                    {{#if items}}
+                        <ul>
+                            {{#each items}}
+                                <li>{{this.name}} - {{this.description}}</li>
+                            {{/each}}
+                        </ul>
+                    {{else}}
+                        <p>You haven't added any items yet.</p>
+                    {{/if}}
+                </div>
+                <div class="box">
+                    <h2 class="title is-4">Actions</h2>
+                    <div class="buttons">
+                        <a href="/add-item" class="button is-primary">Add New Item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
