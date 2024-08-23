@@ -37,7 +37,7 @@ router.get('/dashboard', async (req, res) => {
       });
 
       console.log('Retrieved items for dashboard:', items);
-
+      console.log(req.session);
       res.render('dashboard', {
         items, // Pass items to the template
         logged_in: req.session.logged_in,
@@ -64,6 +64,7 @@ router.post('/api/stock', async (req, res) => {
       item: req.body['item-name'],
       icon: req.body.icon,
       date: req.body['expiration-date'],
+      user_id: req.session.user_id,
     });
 
     console.log('Created new item:', newItem.toJSON());
@@ -72,7 +73,9 @@ router.post('/api/stock', async (req, res) => {
     const responseItem = newItem.toJSON();
     responseItem.icon = iconToEmoji(responseItem.icon);
 
-    res.status(201).json(responseItem);
+    req.session.save(() => {
+      res.status(201).json(responseItem);
+    });
   } catch (err) {
     console.error('Error creating item:', err);
     res.status(500).json({ error: 'Failed to add item', details: err.message });

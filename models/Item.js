@@ -25,7 +25,7 @@ Item.init(
       allowNull: false,
     },
     user_id: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: User,
