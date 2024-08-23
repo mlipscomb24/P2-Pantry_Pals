@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User');
 
 class Item extends Model {}
 
@@ -23,14 +22,6 @@ Item.init(
     date: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
-    owner: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: 'user_id',
-      },
     },
   },
   {
