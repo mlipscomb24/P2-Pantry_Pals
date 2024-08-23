@@ -43,7 +43,7 @@ app.use(routes);
 sequelize
   // alter: true attempts to alter tables to match models without dropping them,
   // force: true would drop the tables completely fyi
-  .sync({ alter: true, force: true })
+  .sync({ alter: true, force: false })
   .then(() => {
     app.listen(PORT, () =>
       console.log(`

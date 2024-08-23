@@ -77,7 +77,7 @@ router.post('/api/stock', async (req, res) => {
     responseItem.icon = iconToEmoji(responseItem.icon);
 
     req.session.save(() => {
-      res.status(201).json(responseItem);
+      res.redirect('/dashboard');
     });
   } catch (err) {
     console.error('Error creating item:', err);

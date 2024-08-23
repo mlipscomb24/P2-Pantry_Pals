@@ -109,7 +109,7 @@ const userController = {
         ...user,
         logged_in: true,
         totalItems: 0, // Placeholder for tbd Items model
-        lastLogin: user.updatedAt ? user.updatedAt.toDateString() : 'N/A',
+        last_login: user.updatedAt ? user.updatedAt.toDateString() : 'N/A',
       });
     } catch (err) {
       res.status(500).json(err);
