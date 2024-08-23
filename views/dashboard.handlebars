@@ -1,54 +1,56 @@
 <section class="section">
     <div class="container">
-        <h1 class="title">Welcome to Your Dashboard, {{username}}!</h1>
+        <h1 class="title">Welcome to Your Dashboard {{username}}!</h1> {{! update function if time allows }}
         <div class="columns">
             <div class="column is-one-quarter">
                 <div class="box">
                     <figure class="image is-128x128 mb-4">
-                        <img src="https://api.dicebear.com/6.x/adventurer/svg?seed={{username}}" alt="{{username}}'s avatar" class="is-rounded">
+                        <img src="https://api.dicebear.com/6.x/adventurer/svg?seed={{username}}" style="transform: scaleX(-1)" alt="{{username}}'s avatar" class="is-rounded">
                     </figure>
                     <p class="title is-5">{{username}}</p>
                     <p class="subtitle is-6">{{email}}</p>
-                    <p>Member since: {{memberSince}}</p>
+                    <p>Member since: {{formatDate created}}</p>
                 </div>
                 <div class="box">
-                    <h2 class="title is-4">Your Stats</h2>
+                    <h2 class="title is-4">Your Stats</h2> {{! update function if time allows }}
                     <p>Total Items: {{totalItems}}</p>
-                    <p>Last Login: {{lastLogin}}</p>
+                    <p>Last Login: {{formatDate last_login}}</p>
+                    <p>Total # of Logins: {{logins}}</p>
                 </div>
             </div>
             <div class="column">
                 <div class="box">
                     <h2 class="title is-4">Your Items</h2>
-                    {{#if items}}
-                        <ul>
+                    <ul id="items-list" class="items-list">
+                        {{#if items}}
                             {{#each items}}
-                                <li>{{this.name}} - {{this.description}}</li>
-                        
-                            {{!-- Expiration Date --}}
-    <p class="{{#if (isExpired expirationDate)}}has-text-danger{{/if}}">
-        {{name}} {{#if (isExpired expirationDate)}} - Expired{{/if}}
-    </p>
-{{/each}}
-                        </ul>
-                    {{else}}
-                        <p>You haven't added any items yet.</p>
-                    {{/if}}
+                                <li class="item-card">
+                                    <span class="item-icon">{{this.icon}}</span>
+                                    <div class="item-details">
+                                        <h3 class="item-name">{{this.item}}</h3>
+                                        <p class="item-date">Expires: {{formatDate exp_date}}</p>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        {{else}}
+                            <p>You haven't added any items yet.</p>
+                        {{/if}}
+                    </ul>
                 </div>
                 <div class="box">
                     <h2 class="title is-4">Add New Item</h2>
-                    <form id="stock-form" action="api/stock" method="POST">
+                    <form id="stock-form" action="/api/stock" method="POST">
                         <div class="field">
-                            <label class="label" for="add-items">Add Items:</label>
+                            <label class="label" for="item-name">Add Items:</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Enter Item" name="item-name" />
+                                <input class="input" type="text" id="item-name" placeholder="Enter Item" name="item-name" required />
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label">Select Icon</label>
+                            <label class="label" for="icon">Select Icon</label>
                             <div class="control">
                                 <div class="select">
-                                    <select name="icon">
+                                    <select id="icon" name="icon" required>
                                         <option value="">Select an icon</option>
                                         <option value="apple">🍎 Apple</option>
                                         <option value="carrot">🥕 Carrot</option>
@@ -70,95 +72,76 @@
                         <div class="field">
                             <label class="label" for="expiration-date">Expiration Date:</label>
                             <div class="control">
-                                <input class="input" type="date" id="expiration-date" name="expiration-date"/>
+                                <input class="input" type="date" id="expiration-date" name="expiration-date" required/>
                             </div>
                         </div>
                         <div class="field is-grouped">
                             <div class="control">
                                 <button type="submit" class="button is-primary">Submit</button>
                             </div>
-                            <div class="control">
-                                <button type="button" class="button is-link is-light add-input">Add More</button>
-                            </div>
                         </div>
                     </form>
                 </div>
-        {{!-- Modal for stock form --}}
-                <div id="modal-js" class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title"> Add Items </p>
-      <button class="delete" aria-label="close"></button>
-    </header>
-    <section class="modal-card-body">
-      {{!--  Stock form  --}}
-<form id= "stock-form" class="input" action = "api/stock" method="POST">
-
-<label for="add-items"> Add Items: </label>
-<div class="control">
-  <input class="input" type="text" placeholder="Enter Item" />
-</div>
-
-<div class="select">
-<label> Select Icon </label>
-  <select>
-    <option> Icon </option>
-    <option> <i class="fa-solid fa-apple-whole"></i> </option>
-    <option> <i class="fa-solid fa-carrot"></i> </option>
-    <option> <i class="fa-solid fa-pepper-hot"></i> </option>
-    <option> <i class="fa-solid fa-fish"></i> </option>
-    <option> <i class="fa-solid fa-cheese"></i> </option>
-	<option> <i class="fa-solid fa-egg"></i> </option>
-	<option> <i class="fa-solid fa-bread-slice"></i> </option>
-	<option> <i class="fa-solid fa-bacon"></i> </option>
-	<option> <i class="fa-solid fa-pizza-slice"></i> </option>
-	<option> <i class="fa-solid fa-seedling"></i> </option>
-	<option> <i class="fa-solid fa-cookie"></i> </option>
-	<option> <i class="fa-solid fa-bowl-rice"></i> </option>
-	<option> <i class="fa-solid fa-bottle-droplet"></i> </option>
-
-</select>
-<label for="date"> Expiration Date: </label>
-<input type="date" id="datepicker"/>
-<script>  $("#datePicker").datePicker({
-        
-        value: new Date(2024, 0, 3),
-        format: "yyyy-MM-dd"
-    }); 
-    </script>
-
-</input>
-
- <button class="add-input"> Add More </button>
-
-</div>
-<button type="submit">Submit</button>
-</form>
-
-    </section>
-    <footer class="modal-card-foot">
-      <div class="buttons">
-        <button class="button is-success">Save changes</button>
-        <button class="button">Cancel</button>
-      </div>
-    </footer>
-  </div>
-</div>
             </div>
         </div>
     </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const addButton = document.querySelector('.add-input');
-    const form = document.getElementById('stock-form');
+<!-- Include the external JavaScript files -->
 
-    addButton.addEventListener('click', () => {
-        const newItemField = form.querySelector('.field').cloneNode(true);
-        newItemField.querySelector('input').value = '';
-        form.insertBefore(newItemField, addButton.parentNode.parentNode);
+<script src="/js/dashboard.js"></script>
+<script src="/js/stock-form.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        tippy('#expiration-date', {
+        content:
+`	1.	Milk
+	•	Expiration: 7–10 days(refrigerated)
+	2.	Bread
+	•	Expiration: 5–7 days(room temperature), 3 months(frozen)
+	3.	Eggs
+	•	Expiration: 3–5 weeks(refrigerated)
+	4.	Bananas
+	•	Expiration: 2–7 days(room temperature)
+	5.	Chicken(Raw)
+	•	Expiration: 1–2 days(refrigerated), 9 months(frozen)
+	6.	Apples
+	•	Expiration: 4–6 weeks(refrigerated), 5–7 days(room temperature)
+	7.	Cheese(Hard)
+	•	Expiration: 3–4 weeks(refrigerated)
+	8.	Ground Beef
+	•	Expiration: 1–2 days(refrigerated), 3–4 months(frozen)
+	9.	Butter
+	•	Expiration: 1–3 months(refrigerated), 6–9 months(frozen)
+	10.	Tomatoes
+	•	Expiration: 1 week(room temperature)
+	11.	Yogurt
+	•	Expiration: 1–3 weeks(refrigerated)
+	12.	Potatoes
+	•	Expiration: 1–2 weeks(room temperature), 2–3 months(cool, dark place)
+	13.	Carrots
+	•	Expiration: 3–4 weeks(refrigerated)
+	14.	Cereal
+	•	Expiration: 6–12 months(unopened), 3–4 months(opened)
+	15.	Lettuce
+	•	Expiration: 1 week(refrigerated)
+	16.	Orange Juice(Unopened)
+	•	Expiration: 1–2 weeks(refrigerated)
+	17.	Onions
+	•	Expiration: 1–2 months(cool, dry place)
+	18.	Pasta(Dry)
+	•	Expiration: 1–2 years(pantry)
+	19.	Rice(Uncooked)
+	•	Expiration: Indefinite(if kept dry), 6 months(cooked, refrigerated)
+                20.	Frozen Vegetables
+	•	Expiration: 8–12 months(frozen) `,
+    trigger: 'focus',
+    interactive: true,
     });
-});
+    });
 </script>
+
+</body>
+</html>
