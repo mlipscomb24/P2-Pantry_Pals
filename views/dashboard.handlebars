@@ -24,19 +24,18 @@
                         <ul>
                             {{#each items}}
                                 <li>{{this.name}} - {{this.description}}</li>
-                            {{/each}}
+                        
+                            {{!-- Expiration Date --}}
+    <p class="{{#if (isExpired expirationDate)}}has-text-danger{{/if}}">
+        {{name}} {{#if (isExpired expirationDate)}} - Expired{{/if}}
+    </p>
+{{/each}}
                         </ul>
                     {{else}}
                         <p>You haven't added any items yet.</p>
                     {{/if}}
                 </div>
                 <div class="box">
-<<<<<<< HEAD
-                    <h2 class="title is-4">Actions</h2>
-                    <div class="buttons">
-                        <button data-target="modal-js" class="button is-primary js-modal-trigger">Add New Item</button>
-                    </div>
-=======
                     <h2 class="title is-4">Add New Item</h2>
                     <form id="stock-form" action="api/stock" method="POST">
                         <div class="field">
@@ -83,7 +82,6 @@
                             </div>
                         </div>
                     </form>
->>>>>>> mirandaP2
                 </div>
         {{!-- Modal for stock form --}}
                 <div id="modal-js" class="modal">
@@ -94,7 +92,7 @@
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      {{!-- // Stock form  --}}
+      {{!--  Stock form  --}}
 <form id= "stock-form" class="input" action = "api/stock" method="POST">
 
 <label for="add-items"> Add Items: </label>
@@ -151,9 +149,6 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
-<script src='/js/stock-form.js'></script>
-=======
 
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -167,4 +162,3 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 </script>
->>>>>>> mirandaP2
