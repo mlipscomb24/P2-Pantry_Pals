@@ -1,7 +1,6 @@
 <section class="section">
     <div class="container">
         <h1 class="title">Welcome to Your Dashboard, {{username}}!</h1>
-
         <div class="columns">
             <div class="column is-one-quarter">
                 <div class="box">
@@ -12,13 +11,13 @@
                     <p class="subtitle is-6">{{email}}</p>
                     <p>Member since: {{memberSince}}</p>
                 </div>
-            </div>
-            <div class="column">
                 <div class="box">
                     <h2 class="title is-4">Your Stats</h2>
                     <p>Total Items: {{totalItems}}</p>
                     <p>Last Login: {{lastLogin}}</p>
                 </div>
+            </div>
+            <div class="column">
                 <div class="box">
                     <h2 class="title is-4">Your Items</h2>
                     {{#if items}}
@@ -32,12 +31,129 @@
                     {{/if}}
                 </div>
                 <div class="box">
-                    <h2 class="title is-4">Actions</h2>
-                    <div class="buttons">
-                        <a href="/add-item" class="button is-primary">Add New Item</a>
-                    </div>
+                    <h2 class="title is-4">Add New Item</h2>
+                    <form id="stock-form" action="api/stock" method="POST">
+                        <div class="field">
+                            <label class="label" for="add-items">Add Items:</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Enter Item" name="item-name" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Select Icon</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select name="icon">
+                                        <option value="">Select an icon</option>
+                                        <option value="apple">🍎 Apple</option>
+                                        <option value="carrot">🥕 Carrot</option>
+                                        <option value="pepper">🌶️ Pepper</option>
+                                        <option value="fish">🐟 Fish</option>
+                                        <option value="cheese">🧀 Cheese</option>
+                                        <option value="egg">🥚 Egg</option>
+                                        <option value="bread">🍞 Bread</option>
+                                        <option value="bacon">🥓 Bacon</option>
+                                        <option value="pizza">🍕 Pizza</option>
+                                        <option value="seedling">🌱 Seedling</option>
+                                        <option value="cookie">🍪 Cookie</option>
+                                        <option value="rice">🍚 Rice</option>
+                                        <option value="bottle">🍶 Bottle</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="expiration-date">Expiration Date:</label>
+                            <div class="control">
+                                <input class="input" type="date" id="expiration-date" name="expiration-date"/>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-primary">Submit</button>
+                            </div>
+                            <div class="control">
+                                <button type="button" class="button is-link is-light add-input">Add More</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+        {{!-- Modal for stock form --}}
+                <div id="modal-js" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"> Add Items </p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      {{!-- // Stock form  --}}
+<form id= "stock-form" class="input" action = "api/stock" method="POST">
+
+<label for="add-items"> Add Items: </label>
+<div class="control">
+  <input class="input" type="text" placeholder="Enter Item" />
+</div>
+
+<div class="select">
+<label> Select Icon </label>
+  <select>
+    <option> Icon </option>
+    <option> <i class="fa-solid fa-apple-whole"></i> </option>
+    <option> <i class="fa-solid fa-carrot"></i> </option>
+    <option> <i class="fa-solid fa-pepper-hot"></i> </option>
+    <option> <i class="fa-solid fa-fish"></i> </option>
+    <option> <i class="fa-solid fa-cheese"></i> </option>
+	<option> <i class="fa-solid fa-egg"></i> </option>
+	<option> <i class="fa-solid fa-bread-slice"></i> </option>
+	<option> <i class="fa-solid fa-bacon"></i> </option>
+	<option> <i class="fa-solid fa-pizza-slice"></i> </option>
+	<option> <i class="fa-solid fa-seedling"></i> </option>
+	<option> <i class="fa-solid fa-cookie"></i> </option>
+	<option> <i class="fa-solid fa-bowl-rice"></i> </option>
+	<option> <i class="fa-solid fa-bottle-droplet"></i> </option>
+
+</select>
+<label for="date"> Expiration Date: </label>
+<input type="date" id="datepicker"/>
+<script>  $("#datePicker").datePicker({
+        
+        value: new Date(2024, 0, 3),
+        format: "yyyy-MM-dd"
+    }); 
+    </script>
+
+</input>
+
+ <button class="add-input"> Add More </button>
+
+</div>
+<button type="submit">Submit</button>
+</form>
+
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </div>
+    </footer>
+  </div>
+</div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const addButton = document.querySelector('.add-input');
+    const form = document.getElementById('stock-form');
+
+    addButton.addEventListener('click', () => {
+        const newItemField = form.querySelector('.field').cloneNode(true);
+        newItemField.querySelector('input').value = '';
+        form.insertBefore(newItemField, addButton.parentNode.parentNode);
+    });
+});
+</script>
