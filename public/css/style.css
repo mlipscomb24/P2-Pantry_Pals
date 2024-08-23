@@ -12,6 +12,10 @@ header {
     padding: 1rem;
 }
 
+#logo {
+    color: #F8971D;
+}
+
 nav a {
     color: #fff;
     text-decoration: none;

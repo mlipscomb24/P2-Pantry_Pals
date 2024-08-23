@@ -30,6 +30,7 @@
                                         <h3 class="item-name">{{this.item}}</h3>
                                         <p class="item-date">Expires: {{formatDate exp_date}}</p>
                                     </div>
+                                    <button class="button is-warning">Remove</button>
                                 </li>
                             {{/each}}
                         {{else}}
@@ -89,8 +90,7 @@
 
 <!-- Include the external JavaScript files -->
 
-<script src="/js/dashboard.js"></script>
-<script src="/js/stock-form.js"></script>
+
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script>
@@ -142,6 +142,8 @@
     });
     });
 </script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/stock-form.js"></script>
 
 </body>
 </html>

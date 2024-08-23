@@ -58,18 +58,27 @@ const userController = {
       let loginStreak;
       if (hoursLastLogin >= 24 && hoursLastLogin < 48) {
         loginStreak = true;
-      } else {
-        loginStreak = false;
       }
+
+      await userData.update({
+        last_login: currentDate,
+        logins: (userData.logins += 1),
+      });
+
+      await userData.save();
+
       req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.user_name = userData.name;
         req.session.logged_in = true;
-        if (loginStreak) {
-          req.session.logins = userData.logins += 1;
-        } else {
-          req.session.logins = userData.logins;
-        }
+        req.session.last_login = userData.last_login.toDateString();
+        req.session.created = userData.created.toDateString();
+        req.session.logins = userData.logins;
+        // if (loginStreak) {
+        //   req.session.logins = userData.logins += 1;
+        // } else {
+        //   req.session.logins = userData.logins;
+        // }
         res.json({
           user: userData,
           message: 'You are now logged in!',
@@ -110,6 +119,7 @@ const userController = {
         logged_in: true,
         totalItems: 0, // Placeholder for tbd Items model
         last_login: user.updatedAt ? user.updatedAt.toDateString() : 'N/A',
+        created: user.created ? user.created.toDateString() : 'N/A',
       });
     } catch (err) {
       res.status(500).json(err);
