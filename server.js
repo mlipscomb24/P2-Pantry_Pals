@@ -3,14 +3,25 @@ const session = require('express-session');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const routes = require('./controllers');
-const sequelize = require('./config/connection'); // Make sure this path is correct
+const sequelize = require('./config/connection'); 
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Set up Handlebars.js engine
-app.engine('handlebars', engine());
+// Set up Handlebars.js engine with custom helpers
+app.engine(
+  'handlebars',
+  engine({
+    helpers: {
+      formatDate: function (date) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(date).toLocaleDateString(undefined, options);
+      },
+    },
+  }),
+);
+
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
