@@ -29,13 +29,10 @@ app.use(
 app.use(routes);
 
 // Sync sequelize models to the database, then start the server
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    app.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`),
-    );
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => 
+    console.log(`Server running on http://localhost:${PORT}`)
+  );
+}).catch(err => {
+  console.error('Unable to connect to the database:', err);
+});
