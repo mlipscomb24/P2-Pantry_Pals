@@ -1,7 +1,6 @@
 <section class="section">
     <div class="container">
         <h1 class="title">Welcome to Your Dashboard, {{username}}!</h1>
-
         <div class="columns">
             <div class="column is-one-quarter">
                 <div class="box">
@@ -12,13 +11,13 @@
                     <p class="subtitle is-6">{{email}}</p>
                     <p>Member since: {{memberSince}}</p>
                 </div>
-            </div>
-            <div class="column">
                 <div class="box">
                     <h2 class="title is-4">Your Stats</h2>
                     <p>Total Items: {{totalItems}}</p>
                     <p>Last Login: {{lastLogin}}</p>
                 </div>
+            </div>
+            <div class="column">
                 <div class="box">
                     <h2 class="title is-4">Your Items</h2>
                     {{#if items}}
@@ -32,10 +31,59 @@
                     {{/if}}
                 </div>
                 <div class="box">
+<<<<<<< HEAD
                     <h2 class="title is-4">Actions</h2>
                     <div class="buttons">
                         <button data-target="modal-js" class="button is-primary js-modal-trigger">Add New Item</button>
                     </div>
+=======
+                    <h2 class="title is-4">Add New Item</h2>
+                    <form id="stock-form" action="api/stock" method="POST">
+                        <div class="field">
+                            <label class="label" for="add-items">Add Items:</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Enter Item" name="item-name" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Select Icon</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select name="icon">
+                                        <option value="">Select an icon</option>
+                                        <option value="apple">🍎 Apple</option>
+                                        <option value="carrot">🥕 Carrot</option>
+                                        <option value="pepper">🌶️ Pepper</option>
+                                        <option value="fish">🐟 Fish</option>
+                                        <option value="cheese">🧀 Cheese</option>
+                                        <option value="egg">🥚 Egg</option>
+                                        <option value="bread">🍞 Bread</option>
+                                        <option value="bacon">🥓 Bacon</option>
+                                        <option value="pizza">🍕 Pizza</option>
+                                        <option value="seedling">🌱 Seedling</option>
+                                        <option value="cookie">🍪 Cookie</option>
+                                        <option value="rice">🍚 Rice</option>
+                                        <option value="bottle">🍶 Bottle</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="expiration-date">Expiration Date:</label>
+                            <div class="control">
+                                <input class="input" type="date" id="expiration-date" name="expiration-date"/>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button type="submit" class="button is-primary">Submit</button>
+                            </div>
+                            <div class="control">
+                                <button type="button" class="button is-link is-light add-input">Add More</button>
+                            </div>
+                        </div>
+                    </form>
+>>>>>>> mirandaP2
                 </div>
         {{!-- Modal for stock form --}}
                 <div id="modal-js" class="modal">
@@ -103,4 +151,20 @@
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 <script src='/js/stock-form.js'></script>
+=======
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const addButton = document.querySelector('.add-input');
+    const form = document.getElementById('stock-form');
+
+    addButton.addEventListener('click', () => {
+        const newItemField = form.querySelector('.field').cloneNode(true);
+        newItemField.querySelector('input').value = '';
+        form.insertBefore(newItemField, addButton.parentNode.parentNode);
+    });
+});
+</script>
+>>>>>>> mirandaP2
