@@ -47,4 +47,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
   } else {
     console.error('Form element not found.');
   }
+
+//DELETE function
+document.querySelectorAll('.button is-warning').forEach((btn) => {
+  btn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const itemId = btn.dataset.itemId;
+    const response = await fetch(`/api/stock/${itemId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      const deletedItem = await response.json();
+      console.log('Deleted item:', deletedItem);
+      const itemToRemove = document.querySelector(`li[data-item-id="${itemId}"]`);
+      itemToRemove.remove();
+    } else {
+      console.error('Failed to delete the item');
+    }
+  });
+});
 });
