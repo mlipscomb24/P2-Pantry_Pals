@@ -1,3 +1,6 @@
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+
 document.addEventListener('DOMContentLoaded', (event) => {
   const form = document.getElementById('stock-form');
 

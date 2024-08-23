@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userController = require('./userController');
 const dashController = require('./dashController'); // Import dashController
+const leaderboardController = require('./leaderboardController');
 
 // Middleware to check if user is logged in
 const withAuth = (req, res, next) => {
@@ -38,8 +39,9 @@ router.get('/login', (req, res) => {
 });
 
 // Register the dashboard routes under the root path
-router.use('/', dashController);
 
+router.use('/', dashController);
+router.use('/', leaderboardController);
 if (userController.signup) {
   router.post('/api/users/signup', userController.signup);
 }

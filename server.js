@@ -41,7 +41,9 @@ app.use(routes);
 
 // Sync sequelize models to the database, then start the server
 sequelize
-  .sync({ force: false })
+  // alter: true attempts to alter tables to match models without dropping them,
+  // force: true would drop the tables completely fyi
+  .sync({ alter: true, force: true })
   .then(() => {
     app.listen(PORT, () =>
       console.log(`

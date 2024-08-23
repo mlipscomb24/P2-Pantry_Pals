@@ -20,9 +20,13 @@ Item.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    date: {
+    add_date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
+    },
+    exp_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     user_id: {
       type: DataTypes.INTEGER,

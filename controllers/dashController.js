@@ -28,7 +28,7 @@ router.get('/dashboard', async (req, res) => {
       const userId = req.session.user_id;
       const itemData = await Item.findAll({
         where: { user_id: userId },
-        attributes: ['item', 'icon', 'date'],
+        attributes: ['item', 'icon', 'exp_date'],
       });
       const items = itemData.map((item) => {
         const plainItem = item.get({ plain: true });
@@ -43,6 +43,9 @@ router.get('/dashboard', async (req, res) => {
         logged_in: req.session.logged_in,
         username: req.session.user_name,
         email: req.session.email,
+        created: req.session.created,
+        logins: req.session.logins,
+        last_login: req.session.last_login,
       });
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
@@ -63,7 +66,7 @@ router.post('/api/stock', async (req, res) => {
     const newItem = await Item.create({
       item: req.body['item-name'],
       icon: req.body.icon,
-      date: req.body['expiration-date'],
+      exp_date: req.body['expiration-date'],
       user_id: req.session.user_id,
     });
 

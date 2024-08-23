@@ -11,18 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const item = document.getElementById('item-name');
       const icon = document.getElementById('icon');
-      const date = document.getElementById('expiration-date');
+      const exp_date = document.getElementById('expiration-date');
 
-      console.log('Form elements:', { item, icon, date });
+      console.log('Form elements:', { item, icon, exp_date });
 
-      if (item && icon && date) {
+      if (item && icon && exp_date) {
         const itemName = item.value.trim();
         const iconValue = icon.value.trim();
-        const dateValue = date.value.trim();
+        const exp_dateValue = exp_date.value.trim();
 
-        console.log('Form data:', { itemName, iconValue, dateValue });
+        console.log('Form data:', { itemName, iconValue, exp_dateValue });
 
-        if (itemName && iconValue && dateValue) {
+        if (itemName && iconValue && exp_dateValue) {
           try {
             const response = await fetch('/api/stock', {
               method: 'POST',
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
               body: JSON.stringify({
                 'item-name': itemName,
                 icon: iconValue,
-                'expiration-date': dateValue,
+                'expiration-date': exp_dateValue,
               }),
             });
 
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
               // Instead of redirecting, update the UI
               const itemsList = document.getElementById('items-list');
               const newItem = document.createElement('li');
-              newItem.textContent = `${itemName} - ${iconValue} - ${dateValue}`;
+              newItem.textContent = `${itemName} - ${iconValue} - ${exp_dateValue}`;
               itemsList.appendChild(newItem);
 
               // Clear the form

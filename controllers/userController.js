@@ -1,16 +1,30 @@
+const { difference } = require('prelude-ls');
 const { User } = require('../models');
-
+const currentDate = new Date();
 const userController = {
   signup: async (req, res) => {
     try {
       const { name, email, password } = req.body;
+      const last_login = currentDate;
+      const logins = 1;
+      const created = currentDate;
       console.log('Attempting to create user:', { name, email }); // Don't log password
-      const userData = await User.create({ name, email, password });
+      const userData = await User.create({
+        name,
+        email,
+        password,
+        last_login,
+        logins,
+        created,
+      });
 
       req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.user_name = userData.name;
         req.session.logged_in = true;
+        req.session.last_login = last_login;
+        req.session.logins = logins;
+        req.session.created = created;
         res.status(200).json({ user: userData, redirect: '/dashboard' });
       });
     } catch (err) {
@@ -38,10 +52,24 @@ const userController = {
         return;
       }
 
+      const differenceCalc = currentDate - userData.last_login;
+      console.log(differenceCalc / (1000 * 60 * 60));
+      const hoursLastLogin = differenceCalc / (1000 * 60 * 60);
+      let loginStreak;
+      if (hoursLastLogin >= 24 && hoursLastLogin < 48) {
+        loginStreak = true;
+      } else {
+        loginStreak = false;
+      }
       req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.user_name = userData.name;
         req.session.logged_in = true;
+        if (loginStreak) {
+          req.session.logins = userData.logins += 1;
+        } else {
+          req.session.logins = userData.logins;
+        }
         res.json({
           user: userData,
           message: 'You are now logged in!',
@@ -49,6 +77,7 @@ const userController = {
         });
       });
     } catch (err) {
+      console.error(err);
       res.status(400).json(err);
     }
   },
