@@ -23,11 +23,12 @@ const iconToEmoji = (iconName) => {
 
 // GET route for the dashboard
 router.get('/dashboard', async (req, res) => {
-  try {
-    const itemData = await Item.findAll({
+  if (req.session.logged_in) {
+    try {
+      const userId = req.session.id;
+      const itemData = await Item.findAll({
       attributes: ['item', 'icon', 'date'],
     });
-
     const items = itemData.map((item) => {
       const plainItem = item.get({ plain: true });
       plainItem.icon = iconToEmoji(plainItem.icon);
@@ -47,6 +48,9 @@ router.get('/dashboard', async (req, res) => {
     res
       .status(500)
       .json({ error: 'Failed to load dashboard', details: err.message });
+  }
+  } else {
+    res.redirect('/login');
   }
 });
 
