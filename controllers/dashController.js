@@ -25,30 +25,31 @@ const iconToEmoji = (iconName) => {
 router.get('/dashboard', async (req, res) => {
   if (req.session.logged_in) {
     try {
-      const userId = req.session.id;
+      const userId = req.session.user_id;
       const itemData = await Item.findAll({
-      attributes: ['item', 'icon', 'date'],
-    });
-    const items = itemData.map((item) => {
-      const plainItem = item.get({ plain: true });
-      plainItem.icon = iconToEmoji(plainItem.icon);
-      return plainItem;
-    });
+        where: { id: userId },
+        attributes: ['item', 'icon', 'date'],
+      });
+      const items = itemData.map((item) => {
+        const plainItem = item.get({ plain: true });
+        plainItem.icon = iconToEmoji(plainItem.icon);
+        return plainItem;
+      });
 
-    console.log('Retrieved items for dashboard:', items);
+      console.log('Retrieved items for dashboard:', items);
 
-    res.render('dashboard', {
-      items, // Pass items to the template
-      logged_in: req.session.logged_in,
-      username: req.session.username,
-      email: req.session.email,
-    });
-  } catch (err) {
-    console.error('Error fetching dashboard data:', err);
-    res
-      .status(500)
-      .json({ error: 'Failed to load dashboard', details: err.message });
-  }
+      res.render('dashboard', {
+        items, // Pass items to the template
+        logged_in: req.session.logged_in,
+        username: req.session.user_name,
+        email: req.session.email,
+      });
+    } catch (err) {
+      console.error('Error fetching dashboard data:', err);
+      res
+        .status(500)
+        .json({ error: 'Failed to load dashboard', details: err.message });
+    }
   } else {
     res.redirect('/login');
   }
