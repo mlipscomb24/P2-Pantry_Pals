@@ -27,7 +27,7 @@ router.get('/dashboard', async (req, res) => {
     try {
       const userId = req.session.user_id;
       const itemData = await Item.findAll({
-        where: { id: userId },
+        where: { user_id: userId },
         attributes: ['item', 'icon', 'date'],
       });
       const items = itemData.map((item) => {
