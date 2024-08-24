@@ -1,5 +1,22 @@
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
+// Helper function to convert icon names to emojis
+const iconToEmoji = (iconName) => {
+  const iconMap = {
+    apple: '🍎',
+    carrot: '🥕',
+    pepper: '🌶️',
+    fish: '🐟',
+    cheese: '🧀',
+    egg: '🥚',
+    bread: '🍞',
+    bacon: '🥓',
+    pizza: '🍕',
+    seedling: '🌱',
+    cookie: '🍪',
+    rice: '🍚',
+    bottle: '🍶',
+  };
+  return iconMap[iconName] || iconName;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const stockForm = document.getElementById('stock-form');
@@ -14,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const exp_date = document.getElementById('expiration-date');
 
       console.log('Form elements:', { item, icon, exp_date });
-
       if (item && icon && exp_date) {
         const itemName = item.value.trim();
         const iconValue = icon.value.trim();
@@ -24,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (itemName && iconValue && exp_dateValue) {
           try {
+            console.log('Performing fetch POST to /api/stock endpoint');
             const response = await fetch('/api/stock', {
               method: 'POST',
               headers: {
@@ -35,21 +52,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 'expiration-date': exp_dateValue,
               }),
             });
+            console.log('Initiating content type check');
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/json')) {
+              console.log('Content type check passed');
+              const responseData = await response.json();
+              console.log('Server response:', response.status, responseData);
 
-            const responseData = await response.json();
-            console.log('Server response:', response.status, responseData);
-
-            if (response.ok) {
-              // Instead of redirecting, update the UI
-              const itemsList = document.getElementById('items-list');
-              const newItem = document.createElement('li');
-              newItem.textContent = `${itemName} - ${iconValue} - ${exp_dateValue}`;
-              itemsList.appendChild(newItem);
-
-              // Clear the form
-              stockForm.reset();
+              if (response.ok) {
+                // Instead of redirecting, update the UI
+                const itemsList = document.getElementById('items-list');
+                const newItem = document.createElement('li');
+                newItem.classList.add('item-card');
+                newItem.setAttribute('data-id', responseData.item_id);
+                newItem.innerHTML = `
+                    <span class="item-icon">${iconToEmoji(iconValue)}</span>
+                    <div class="item-details">
+                        <h3 class="item-name">${itemName}</h3>
+                        <p class="item-date">Expires: ${exp_dateValue}</p>
+                    </div>
+                    <a href="" class="button is-warning">Remove</a>
+                `;
+                // newItem.textContent = `${itemName} - ${iconValue} - ${exp_dateValue}`;
+                itemsList.appendChild(newItem);
+                // Clear the form
+                console.log('Clearing the form...');
+                stockForm.reset();
+              } else {
+                console.error('Failed to add item:', responseData.error);
+              }
             } else {
-              console.error('Failed to add item:', responseData.error);
+              console.error('ExprectedJSON but received:', contentType);
             }
           } catch (error) {
             console.error('Error:', error);

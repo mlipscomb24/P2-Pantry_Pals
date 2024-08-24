@@ -23,17 +23,9 @@
                     <h2 class="title is-4">Your Items</h2>
                     <ul id="items-list" class="items-list">
                         {{#if items}}
-                            {{#each items}}
-                                <li class="item-card">
-                                    <span class="item-icon">{{this.icon}}</span>
-                                    <div class="item-details">
-                                        <h3 class="item-name">{{this.item}}</h3>
-                                        <p class="item-date">Expires: {{formatDate exp_date}}</p>
-                                    </div>
-                                </li>
-                            {{/each}}
+                        {{> item-list items=items }}
                         {{else}}
-                            <p>You haven't added any items yet.</p>
+                        <p>You haven't added any items yet.</p>
                         {{/if}}
                     </ul>
                 </div>
@@ -112,8 +104,7 @@
 
 <!-- Include the external JavaScript files -->
 
-<script src="/js/dashboard.js"></script>
-<script src="/js/stock-form.js"></script>
+
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script>
@@ -162,6 +153,6 @@
     });
     });
 </script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/stock-form.js"></script>
 
-</body>
-</html>

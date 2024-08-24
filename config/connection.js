@@ -22,6 +22,7 @@ if (process.env.DB_URL) {
     {
       host: process.env.DB_HOST || 'localhost',
       dialect: 'postgres',
+      logging: console.log,
       port: process.env.DB_PORT || 5432,
     },
   );
