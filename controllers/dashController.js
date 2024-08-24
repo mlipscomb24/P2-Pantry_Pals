@@ -135,17 +135,17 @@ router.post('/api/stock', async (req, res) => {
 module.exports = router;
 
 // DELETE route
-router.delete('/api/stock', async (req, res) => {
+router.delete('/api/stock/:id', async (req, res) => {
   // delete item by its id
-  
+
   try {
-  const allItems = await Item.destroy ({
-    where: {
-    item_id: req.params.id,
-  }, 
-  }); 
-  
-  if (!allItems) {
+    const allItems = await Item.destroy({
+      where: {
+        item_id: req.params.id,
+      },
+    });
+
+    if (!allItems) {
     res.status(404).json({ message: 'That id is not associated with an item' }); 
     return;
   }
