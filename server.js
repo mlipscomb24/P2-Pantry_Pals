@@ -19,10 +19,12 @@ app.engine(
         return new Date(date).toLocaleDateString(undefined, options);
       },
     },
+    partialsDir: path.join(__dirname, 'views', 'partials'),
   }),
 );
 
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

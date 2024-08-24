@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Item } = require('../models');
 
+const currentDate = new Date();
+
 // Helper function to convert icon names to emojis
 const iconToEmoji = (iconName) => {
   const iconMap = {
@@ -28,7 +30,7 @@ router.get('/dashboard', async (req, res) => {
       const userId = req.session.user_id;
       const itemData = await Item.findAll({
         where: { user_id: userId },
-        attributes: ['item', 'icon', 'exp_date'],
+        attributes: ['item_id', 'item', 'icon', 'exp_date'],
       });
       const items = itemData.map((item) => {
         const plainItem = item.get({ plain: true });
@@ -66,18 +68,40 @@ router.post('/api/stock', async (req, res) => {
     const newItem = await Item.create({
       item: req.body['item-name'],
       icon: req.body.icon,
+      add_date: currentDate,
       exp_date: req.body['expiration-date'],
       user_id: req.session.user_id,
     });
 
     console.log('Created new item:', newItem.toJSON());
 
+    // const userId = req.session.user_id;
+    // const itemData = await Item.findAll({
+    //   where: { user_id: userId },
+    //   attributes: ['item_id', 'item', 'icon', 'exp_date'],
+    // });
+
+    // const items = itemData.map((item) => {
+    //   const plainItem = item.get({ plain: true });
+    //   plainItem.icon = iconToEmoji(plainItem.icon);
+    //   return plainItem;
+    // });
+
     // Convert the icon to emoji before sending the response
     const responseItem = newItem.toJSON();
     responseItem.icon = iconToEmoji(responseItem.icon);
 
     req.session.save(() => {
-      res.redirect('/dashboard');
+      res.status(201).json(responseItem);
+      // res.render('dashboard', {
+      //   items, // Pass items to the template
+      //   logged_in: req.session.logged_in,
+      //   username: req.session.user_name,
+      //   email: req.session.email,
+      //   created: req.session.created,
+      //   logins: req.session.logins,
+      //   last_login: req.session.last_login,
+      // });
     });
   } catch (err) {
     console.error('Error creating item:', err);

@@ -56,6 +56,7 @@ const userController = {
       console.log(differenceCalc / (1000 * 60 * 60));
       const hoursLastLogin = differenceCalc / (1000 * 60 * 60);
       let loginStreak;
+
       if (hoursLastLogin >= 24 && hoursLastLogin < 48) {
         loginStreak = true;
       }
