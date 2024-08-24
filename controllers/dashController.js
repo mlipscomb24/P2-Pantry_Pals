@@ -146,14 +146,16 @@ router.delete('/api/stock/:id', async (req, res) => {
     });
 
     if (!allItems) {
-    res.status(404).json({ message: 'That id is not associated with an item' }); 
-    return;
-  }
+      res
+        .status(404)
+        .json({ message: 'That id is not associated with an item' });
+      return;
+    }
     res.status(200).json(allItems);
-    } catch (err) {
-    console.log(err); 
-    res.status(500).json(err); 
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
-  });
-  
-  module.exports = router
+});
+
+module.exports = router;

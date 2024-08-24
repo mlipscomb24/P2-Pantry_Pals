@@ -5,6 +5,7 @@ const path = require('path');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 require('dotenv').config();
+const seedTips = require('./seeds/tips');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
