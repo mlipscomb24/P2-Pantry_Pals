@@ -24,4 +24,4 @@ Tip.init(
   },
 );
 
-module.exports = Item;
+module.exports = Tip;

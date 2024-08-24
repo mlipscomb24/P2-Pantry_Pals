@@ -1,9 +1,9 @@
-const sequelize = require('./config/connection');
+const sequelize = require('../config/connection');
 const seedTips = require('./tips');
 
 const seedAll = async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log('Database synced and cleared');
 
     await seedTips();

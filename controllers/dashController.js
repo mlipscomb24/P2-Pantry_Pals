@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Item } = require('../models');
+const { Item, Tip } = require('../models');
 
 const currentDate = new Date();
 
@@ -61,9 +61,15 @@ router.get('/dashboard', async (req, res) => {
         return plainItem;
       });
 
+      const tipId = Math.floor(Math.random() * 67) + 1;
+      const randomTip = await Tip.findByPk(tipId);
+      const tipContent = randomTip.get({ plain: true });
+      const tip = tipContent.tip_content;
+
       console.log('Retrieved items for dashboard:', items);
       console.log(req.session);
       res.render('dashboard', {
+        tip,
         items, // Pass items to the template
         logged_in: req.session.logged_in,
         username: req.session.user_name,
