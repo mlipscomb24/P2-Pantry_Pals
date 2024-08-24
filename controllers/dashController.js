@@ -5,10 +5,32 @@ const { Item } = require('../models');
 const iconToEmoji = (iconName) => {
   const iconMap = {
     apple: '🍎',
+    banana: '🍌',
+    orange: '🍊',
+    grapes: '🍇',
+    kiwi: '🥝',
+    peach: '🍑',
+    berry: '🫐',
+    watermelon: '🍉',
+    lemon: '🍋',
+    melon: '🍈',
+    pineapple: '🍍',
+    strawberry: '🍓',
+    mango: '🥭',
+    avocado: '🥑',
     carrot: '🥕',
     pepper: '🌶️',
+    eggplant: '🍆',
+    tomato: '🍅',
+    corn: '🌽 ',
+    broccoli: '🥦',
+    leafygreen: '🥬',
     fish: '🐟',
+    shrimp: '🍤',
     cheese: '🧀',
+    milk: '🥛',
+    steak: '🥩',
+    chicken: '🍗',
     egg: '🥚',
     bread: '🍞',
     bacon: '🥓',
@@ -17,6 +39,7 @@ const iconToEmoji = (iconName) => {
     cookie: '🍪',
     rice: '🍚',
     bottle: '🍶',
+    juice: '🧃',
   };
   return iconMap[iconName] || iconName;
 };
@@ -86,3 +109,27 @@ router.post('/api/stock', async (req, res) => {
 });
 
 module.exports = router;
+
+// DELETE route
+router.delete('/api/stock', async (req, res) => {
+  // delete item by its id
+  
+  try {
+  const allItems = await Item.destroy ({
+    where: {
+    item_id: req.params.id,
+  }, 
+  }); 
+  
+  if (!allItems) {
+    res.status(404).json({ message: 'That id is not associated with an item' }); 
+    return;
+  }
+    res.status(200).json(allItems);
+    } catch (err) {
+    console.log(err); 
+    res.status(500).json(err); 
+  }
+  });
+  
+  module.exports = router
