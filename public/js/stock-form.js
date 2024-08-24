@@ -67,46 +67,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tippy('#expiration-date', {
         content:
-`	1.	Milk
-	•	Expiration: 7–10 days(refrigerated)
-	2.	Bread
-	•	Expiration: 5–7 days(room temperature), 3 months(frozen)
-	3.	Eggs
-	•	Expiration: 3–5 weeks(refrigerated)
-	4.	Bananas
-	•	Expiration: 2–7 days(room temperature)
-	5.	Chicken(Raw)
-	•	Expiration: 1–2 days(refrigerated), 9 months(frozen)
-	6.	Apples
-	•	Expiration: 4–6 weeks(refrigerated), 5–7 days(room temperature)
-	7.	Cheese(Hard)
-	•	Expiration: 3–4 weeks(refrigerated)
-	8.	Ground Beef
-	•	Expiration: 1–2 days(refrigerated), 3–4 months(frozen)
-	9.	Butter
-	•	Expiration: 1–3 months(refrigerated), 6–9 months(frozen)
-	10.	Tomatoes
-	•	Expiration: 1 week(room temperature)
-	11.	Yogurt
-	•	Expiration: 1–3 weeks(refrigerated)
-	12.	Potatoes
-	•	Expiration: 1–2 weeks(room temperature), 2–3 months(cool, dark place)
-	13.	Carrots
-	•	Expiration: 3–4 weeks(refrigerated)
-	14.	Cereal
-	•	Expiration: 6–12 months(unopened), 3–4 months(opened)
-	15.	Lettuce
-	•	Expiration: 1 week(refrigerated)
-	16.	Orange Juice(Unopened)
-	•	Expiration: 1–2 weeks(refrigerated)
-	17.	Onions
-	•	Expiration: 1–2 months(cool, dry place)
-	18.	Pasta(Dry)
-	•	Expiration: 1–2 years(pantry)
-	19.	Rice(Uncooked)
-	•	Expiration: Indefinite(if kept dry), 6 months(cooked, refrigerated)
-                20.	Frozen Vegetables
-	•	Expiration: 8–12 months(frozen) `,
+`	Refrigerated Items:
+1.	Milk: 7–10 days
+2.	Eggs: 3–5 weeks, hard-boiled: 1 week
+3.  Bacon: 2 weeks (unopened), 1 week (opened)
+4.	Cheese(Hard): 3–4 weeks
+5.  Bread: 2 weeks
+6.	Chicken(Raw): 1–2 days
+7.	Ground Beef: 1–2 days
+8.  Deli Meat: 2 weeks (unopened), 3-5 days (opened)
+9.	Apples: 4–6 weeks
+10.  Berries: 5 days
+11.  Lemon/Lime: 3 weeks
+12.	Butter: 1–3 months
+13.	Yogurt: 2 weeks
+14.	Carrots: 3–4 weeks
+15. Lettuce: 1 week
+16. Broccoli/Cauliflower: 1 week
+17. Chard/Kale/Spinach: 5 days
+18.	Fruit Juice: 1–2 weeks
+19.	Rice: 6 months(cooked)
+20. Jelly/Jam/Preserves: 1 year (unopened), 8 months (opened)
+21. Nut Butter: 6-9 months
+22. Mayonnaise: 4 months (unopened), 2 months (opened)
+23. Ketchup: 1 year (unopened), 5 months (opened)
+24. Mustard: 2 years (unopened), 1 year (opened)
+25. Pickles/Olives/Relishes: 1 year (unopened), 3 months (opened)
+
+Pantry Items:
+1.  Onions: 1–2 months
+2.	Potatoes: 1–2 weeks
+3.	Tomatoes: 1 week
+4.  Avocados: 5-7 days (unripened)
+5.	Apples: 5–7 days
+6.  Bananas: 2–7 days
+7.  Bread: 5–7 days
+8. Olive Oil: 18-24 months
+9. Oils(Canola/Corn/Vegetable): 1-2 years (unopened), 6-8 months (opened)`,
     trigger: focus,
     interactive: true,
     });
