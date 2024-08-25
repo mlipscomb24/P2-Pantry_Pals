@@ -1,5 +1,23 @@
-{{#each leaderboard}}
-    <h1 class="title">
-        {{this.name}} - Power: {{this.power}} - Rank: {{this.rank}}
-    </h1>
-{{/each}}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                {{#each leaderboard}}
+                <div class="box p-4">
+                    <div class="columns pt-3">
+                        <h1 class="title mx-3 pt-2">{{this.rank}}</h1>
+                    <figure class="image is-64x64 mb-0">
+                    <img src="https://api.dicebear.com/6.x/adventurer/svg?seed={{this.name}}" style="transform: scaleX(-1)"
+            alt="Pantry Pals's avatar" class="is-rounded">
+                    </figure>
+                <p class="has-text-info has-background-info-light pt-4 px-2">{{this.name}}<p class="mx-4"> 
+
+            Pal Power: {{this.power}}
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+    </div>
+</section>

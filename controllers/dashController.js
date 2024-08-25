@@ -53,7 +53,7 @@ router.get('/dashboard', async (req, res) => {
       const userId = req.session.user_id;
       const itemData = await Item.findAll({
         where: { user_id: userId },
-        attributes: ['item_id', 'item', 'icon', 'exp_date'],
+        attributes: ['item_id', 'item', 'icon', 'exp_date', 'status'],
       });
       const items = itemData.map((item) => {
         const plainItem = item.get({ plain: true });
@@ -119,6 +119,7 @@ router.post('/api/stock', async (req, res) => {
     // Convert the icon to emoji before sending the response
     const responseItem = newItem.toJSON();
     responseItem.icon = iconToEmoji(responseItem.icon);
+    responseItem.status = newItem.status;
 
     req.session.save(() => {
       res.status(201).json(responseItem);

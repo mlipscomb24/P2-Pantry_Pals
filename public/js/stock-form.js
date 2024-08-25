@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="item-icon">${iconToEmoji(iconValue)}</span>
                     <div class="item-details">
                         <h3 class="item-name">${itemName}</h3>
-                        <p class="item-date">Expires: ${exp_dateValue}</p>
+                        <p class="item-date ${responseData.status}">Expires: ${exp_dateValue}</p>
                     </div>
                     <a href="" class="button is-warning">Remove</a>
                 `;
