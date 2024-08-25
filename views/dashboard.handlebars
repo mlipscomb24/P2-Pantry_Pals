@@ -93,7 +93,7 @@
                         </div>
                         <div class="field is-grouped">
                             <div class="control">
-                                <button type="submit" class="button is-primary">Submit</button>
+                                <button type="submit" id="submit-btn" class="button is-primary">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -112,45 +112,69 @@
     document.addEventListener('DOMContentLoaded', function() {
         tippy('#expiration-date', {
         content:    
-`	Refrigerated Items:
-    1.	Milk: 7–10 days
-	2.	Eggs: 3–5 weeks, hard-boiled: 1 week
-    3.  Bacon: 2 weeks (unopened), 1 week (opened)
-    4.	Cheese(Hard): 3–4 weeks
-    5.  Bread: 2 weeks
-	6.	Chicken(Raw): 1–2 days
-    7.	Ground Beef: 1–2 days
-    8.  Deli Meat: 2 weeks (unopened), 3-5 days (opened)
-	9.	Apples: 4–6 weeks
-    10.  Berries: 5 days
-    11.  Lemon/Lime: 3 weeks
-	12.	Butter: 1–3 months
-	13.	Yogurt: 2 weeks
-	14.	Carrots: 3–4 weeks
-	15. Lettuce: 1 week
-    16. Broccoli/Cauliflower: 1 week
-    17. Chard/Kale/Spinach: 5 days
-	18.	Fruit Juice: 1–2 weeks
-	19.	Rice: 6 months(cooked)
-    20. Jelly/Jam/Preserves: 1 year (unopened), 8 months (opened)
-    21. Nut Butter: 6-9 months
-    22. Mayonnaise: 4 months (unopened), 2 months (opened)
-    23. Ketchup: 1 year (unopened), 5 months (opened)
-    24. Mustard: 2 years (unopened), 1 year (opened)
-    25. Pickles/Olives/Relishes: 1 year (unopened), 3 months (opened)
-
-    Pantry Items:
-    1.  Onions: 1–2 months
-    2.	Potatoes: 1–2 weeks
-    3.	Tomatoes: 1 week
-    4.  Avocados: 5-7 days (unripened)
-    5.	Apples: 5–7 days
-    6.  Bananas: 2–7 days
-    7.  Bread: 5–7 days
-    8. Olive Oil: 18-24 months
-    9. Oils(Canola/Corn/Vegetable): 1-2 years (unopened), 6-8 months (opened)`,
+    `<span class="is-size-7 has-text-info-dark"><strong>Refrigerated Items:</strong><br>
+    1.	Milk: 7–10 days<br>
+	2.	Eggs: 3–5 weeks, hard-boiled: 1 week<br>
+    3.  Bacon: 2 weeks (unopened), 1 week (opened)<br>
+    4.	Cheese(Hard): 3–4 weeks<br>
+    5.  Bread: 2 weeks<br>
+	6.	Chicken(Raw): 1–2 days<br>
+    7.	Ground Beef: 1–2 days<br>
+    8.  Deli Meat: 2 weeks (unopened), 3-5 days (opened)<br>
+	9.	Apples: 4–6 weeks<br>
+    10.  Berries: 5 days<br>
+    11.  Lemon/Lime: 3 weeks<br>
+	12.	Butter: 1–3 months<br>
+	13.	Yogurt: 2 weeks<br>
+	14.	Carrots: 3–4 weeks<br>
+	15. Lettuce: 1 week<br>
+    16. Broccoli/Cauliflower: 1 week<br>
+    17. Chard/Kale/Spinach: 5 days<br>
+	18.	Fruit Juice: 1–2 weeks<br>
+	19.	Rice: 6 months(cooked)<br>
+    20. Jelly/Jam/Preserves: 1 year (unopened), 8 months (opened)<br>
+    21. Nut Butter: 6-9 months<br>
+    22. Mayonnaise: 4 months (unopened), 2 months (opened)<br>
+    23. Ketchup: 1 year (unopened), 5 months (opened)<br>
+    24. Mustard: 2 years (unopened), 1 year (opened)<br>
+    25. Pickles/Olives/Relishes: 1 year (unopened), 3 months (opened)<br>
+    <br>
+    <strong>Pantry Items:</strong><br>
+    1.  Onions: 1–2 months<br>
+    2.	Potatoes: 1–2 weeks<br>
+    3.	Tomatoes: 1 week<br>
+    4.  Avocados: 5-7 days (unripened)<br>
+    5.	Apples: 5–7 days<br>
+    6.  Bananas: 2–7 days<br>
+    7.  Bread: 5–7 days<br>
+    8. Olive Oil: 18-24 months<br>
+    9. Oils(Canola/Corn/Vegetable): 1-2 years (unopened), 6-8 months (opened)</span>`,
+    allowHTML: true,
+    animateFill: true,
     trigger: 'focus',
     interactive: true,
+    theme: 'light',
+    });
+    tippy('#remove-btn', {
+            content: 'Score! 10 Pantry Power!',
+            animateFill: true,
+            trigger: 'click',
+            theme: 'light',
+            arrow: true,
+            animation:'scale-extreme',
+            inertia: true,
+            followCursor: 'initial',
+            plugins: [followCursor],
+            delay: [0, 800],
+    });
+    tippy('#submit-btn', {
+            content: 'Score! 10 Pantry Power!',
+            trigger: 'click',
+            theme: 'light',
+            arrow: true,
+            animation: 'scale-extreme',
+            inertia: true,
+            delay: [0, 800],
     });
     });
 </script>

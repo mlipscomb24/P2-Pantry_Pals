@@ -64,6 +64,7 @@ const userController = {
       await userData.update({
         last_login: currentDate,
         logins: (userData.logins += 1),
+        power: (userData.power += 10),
       });
 
       await userData.save();

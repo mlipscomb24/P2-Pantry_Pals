@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Item, Tip } = require('../models');
+const { Item, Tip, User } = require('../models');
 
 const currentDate = new Date();
 
@@ -105,17 +105,13 @@ router.post('/api/stock', async (req, res) => {
 
     console.log('Created new item:', newItem.toJSON());
 
-    // const userId = req.session.user_id;
-    // const itemData = await Item.findAll({
-    //   where: { user_id: userId },
-    //   attributes: ['item_id', 'item', 'icon', 'exp_date'],
-    // });
+    const user = await User.findByPk(req.session.user_id);
 
-    // const items = itemData.map((item) => {
-    //   const plainItem = item.get({ plain: true });
-    //   plainItem.icon = iconToEmoji(plainItem.icon);
-    //   return plainItem;
-    // });
+    if (user) {
+      console.log('Awarding points.');
+      user.power += 10;
+      await user.save();
+    }
 
     // Convert the icon to emoji before sending the response
     const responseItem = newItem.toJSON();
@@ -124,15 +120,6 @@ router.post('/api/stock', async (req, res) => {
 
     req.session.save(() => {
       res.status(201).json(responseItem);
-      // res.render('dashboard', {
-      //   items, // Pass items to the template
-      //   logged_in: req.session.logged_in,
-      //   username: req.session.user_name,
-      //   email: req.session.email,
-      //   created: req.session.created,
-      //   logins: req.session.logins,
-      //   last_login: req.session.last_login,
-      // });
     });
   } catch (err) {
     console.error('Error creating item:', err);
@@ -147,19 +134,27 @@ router.delete('/api/stock/:id', async (req, res) => {
   // delete item by its id
 
   try {
-    const allItems = await Item.destroy({
-      where: {
-        item_id: req.params.id,
-      },
-    });
+    const item = await Item.findByPk(req.params.id);
 
-    if (!allItems) {
+    if (!item) {
       res
         .status(404)
         .json({ message: 'That id is not associated with an item' });
       return;
     }
-    res.status(200).json(allItems);
+    const userId = item.user_id;
+
+    await item.destroy();
+
+    const user = await User.findByPk(userId);
+
+    if (user) {
+      console.log('Awarding points.');
+      user.power += 10;
+      await user.save();
+    }
+
+    res.status(200).json({ message: 'Item deleted and points updated', user });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
