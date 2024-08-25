@@ -35,6 +35,27 @@ User.init(
         len: [8],
       },
     },
+    power: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    last_login: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    logins: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    pals: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     hooks: {

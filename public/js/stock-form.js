@@ -1,3 +1,48 @@
+// Helper function to convert icon names to emojis
+const currentDate = new Date();
+const itemsList = document.getElementById('items-list');
+const iconToEmoji = (iconName) => {
+  const iconMap = {
+    apple: '🍎',
+    banana: '🍌',
+    orange: '🍊',
+    grapes: '🍇',
+    kiwi: '🥝',
+    peach: '🍑',
+    berry: '🫐',
+    watermelon: '🍉',
+    lemon: '🍋',
+    melon: '🍈',
+    pineapple: '🍍',
+    strawberry: '🍓',
+    mango: '🥭',
+    avocado: '🥑',
+    carrot: '🥕',
+    pepper: '🌶️',
+    eggplant: '🍆',
+    tomato: '🍅',
+    corn: '🌽 ',
+    broccoli: '🥦',
+    leafygreen: '🥬',
+    fish: '🐟',
+    shrimp: '🍤',
+    cheese: '🧀',
+    milk: '🥛',
+    steak: '🥩',
+    chicken: '🍗',
+    egg: '🥚',
+    bread: '🍞',
+    bacon: '🥓',
+    pizza: '🍕',
+    seedling: '🌱',
+    cookie: '🍪',
+    rice: '🍚',
+    bottle: '🍶',
+    juice: '🧃',
+  };
+  return iconMap[iconName] || iconName;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const stockForm = document.getElementById('stock-form');
   console.log('Form found:', stockForm);
@@ -8,19 +53,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const item = document.getElementById('item-name');
       const icon = document.getElementById('icon');
-      const date = document.getElementById('expiration-date');
+      const exp_date = document.getElementById('expiration-date');
 
-      console.log('Form elements:', { item, icon, date });
-
-      if (item && icon && date) {
+      console.log('Form elements:', { item, icon, exp_date });
+      if (item && icon && exp_date) {
         const itemName = item.value.trim();
         const iconValue = icon.value.trim();
-        const dateValue = date.value.trim();
+        const exp_dateValue = exp_date.value.trim();
 
-        console.log('Form data:', { itemName, iconValue, dateValue });
+        console.log('Form data:', { itemName, iconValue, exp_dateValue });
 
-        if (itemName && iconValue && dateValue) {
+        if (itemName && iconValue && exp_dateValue) {
           try {
+            console.log('Performing fetch POST to /api/stock endpoint');
             const response = await fetch('/api/stock', {
               method: 'POST',
               headers: {
@@ -29,24 +74,39 @@ document.addEventListener('DOMContentLoaded', () => {
               body: JSON.stringify({
                 'item-name': itemName,
                 icon: iconValue,
-                'expiration-date': dateValue,
+                'expiration-date': exp_dateValue,
               }),
             });
+            console.log('Initiating content type check');
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/json')) {
+              console.log('Content type check passed');
+              const responseData = await response.json();
+              console.log('Server response:', response.status, responseData);
 
-            const responseData = await response.json();
-            console.log('Server response:', response.status, responseData);
-
-            if (response.ok) {
-              // Instead of redirecting, update the UI
-              const itemsList = document.getElementById('items-list');
-              const newItem = document.createElement('li');
-              newItem.textContent = `${itemName} - ${iconValue} - ${dateValue}`;
-              itemsList.appendChild(newItem);
-
-              // Clear the form
-              stockForm.reset();
+              if (response.ok) {
+                // Instead of redirecting, update the UI
+                const newItem = document.createElement('li');
+                newItem.classList.add('item-card');
+                newItem.setAttribute('data-id', responseData.item_id);
+                newItem.innerHTML = `
+                    <span class="item-icon">${iconToEmoji(iconValue)}</span>
+                    <div class="item-details">
+                        <h3 class="item-name">${itemName}</h3>
+                        <p class="item-date">Expires: ${exp_dateValue}</p>
+                    </div>
+                    <a href="" class="button is-warning">Remove</a>
+                `;
+                // newItem.textContent = `${itemName} - ${iconValue} - ${exp_dateValue}`;
+                itemsList.appendChild(newItem);
+                // Clear the form
+                console.log('Clearing the form...');
+                stockForm.reset();
+              } else {
+                console.error('Failed to add item:', responseData.error);
+              }
             } else {
-              console.error('Failed to add item:', responseData.error);
+              console.error('ExprectedJSON but received:', contentType);
             }
           } catch (error) {
             console.error('Error:', error);
@@ -61,4 +121,50 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.error('Stock form element not found.');
   }
+
+  //DELETE function
+  itemsList.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('is-warning')) {
+      event.preventDefault();
+      const itemId = event.target.closest('li').dataset.id;
+      console.log('Detected click', itemId);
+      const response = await fetch(`/api/stock/${itemId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Deleting item:', itemId);
+        const itemToRemove = document.querySelector(`li[data-id="${itemId}"]`);
+        if (itemToRemove) {
+          itemToRemove.remove();
+          const deletedItem = await response.json();
+          console.log('Deleted item:', deletedItem);
+        } else {
+          console.error('Failed to delete the item');
+        }
+      } else {
+        console.error('Failed to delete the item');
+      }
+    }
+  });
 });
+
+// const firstLoginOfDay = function(currentDate, lastLoginDate) {
+//   const differenceCalc = currentDate - userData.last_login;
+//   const hoursLastLogin = differenceCalc / (1000 * 60 * 60);
+//   if (hoursLastLogin >= 24 && hoursLastLogin < 48) {
+//     return true;
+//   }
+//   return false;
+// };
+
+// tips array
+// Math.floor Math.random
+
+// button to dismiss
+// power + pointValue * loginStreak
+
+// eligibleForPts
+// if item
+//  calcDifference currentDate - add_date >= 24 && exp_date > currentDate
+//  eligibleForPts = true;
