@@ -77,6 +77,7 @@ router.get('/dashboard', async (req, res) => {
         created: req.session.created,
         logins: req.session.logins,
         last_login: req.session.last_login,
+        power: req.session.power,
       });
     } catch (err) {
       console.error('Error fetching dashboard data:', err);

@@ -6,7 +6,7 @@ router.get('/leaderboard', async (req, res) => {
   try {
     console.log('Fetching Users');
     const leaderboardData = await User.findAll({
-      attributes: ['id', 'name', 'power'],
+      attributes: ['id', 'name', 'power', 'created'],
       order: [['power', 'DESC']],
     });
     console.log('Iterating over User list assigning ranks.');

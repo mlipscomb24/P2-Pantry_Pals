@@ -41,18 +41,18 @@ Item.init(
       get() {
         const expDate = this.getDataValue('exp_date');
         const currentDate = new Date();
-        const timeDiff = new Date(expDate) - currentDate; 
+        const timeDiff = new Date(expDate) - currentDate;
         const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
 
         if (daysDiff < 0) {
-          return 'has-text-danger';
+          return 'has-background-danger';
         } else if (daysDiff < 3) {
-          return 'has-text-warning';
+          return 'has-background-warning';
         } else {
-          return 'null';
-      }
-    }, 
-  }, 
+          return null;
+        }
+      },
+    },
   },
   {
     sequelize,
