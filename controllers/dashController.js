@@ -120,6 +120,7 @@ router.post('/api/stock', async (req, res) => {
     const responseItem = newItem.toJSON();
     responseItem.icon = iconToEmoji(responseItem.icon);
     responseItem.status = newItem.status;
+
     req.session.save(() => {
       res.status(201).json(responseItem);
       // res.render('dashboard', {
