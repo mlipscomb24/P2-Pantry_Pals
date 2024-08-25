@@ -1,5 +1,6 @@
 // Helper function to convert icon names to emojis
 const currentDate = new Date();
+const itemsList = document.getElementById('items-list');
 const iconToEmoji = (iconName) => {
   const iconMap = {
     apple: '🍎',
@@ -85,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
               if (response.ok) {
                 // Instead of redirecting, update the UI
-                const itemsList = document.getElementById('items-list');
                 const newItem = document.createElement('li');
                 newItem.classList.add('item-card');
                 newItem.setAttribute('data-id', responseData.item_id);
@@ -123,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //DELETE function
-  document.querySelectorAll('.button.is-warning').forEach((btn) => {
-    btn.addEventListener('click', async (event) => {
+  itemsList.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('is-warning')) {
       event.preventDefault();
-      const itemId = btn.closest('li').dataset.id;
+      const itemId = event.target.closest('li').dataset.id;
       console.log('Detected click', itemId);
       const response = await fetch(`/api/stock/${itemId}`, {
         method: 'DELETE',
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         console.error('Failed to delete the item');
       }
-    });
+    }
   });
 });
 
