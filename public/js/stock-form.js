@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Instead of redirecting, update the UI
                 const newItem = document.createElement('li');
                 newItem.classList.add('item-card');
+                newItem.classList.add(`${responseData.status}`);
                 newItem.setAttribute('data-id', responseData.item_id);
                 newItem.innerHTML = `
                     <span class="item-icon">${iconToEmoji(iconValue)}</span>

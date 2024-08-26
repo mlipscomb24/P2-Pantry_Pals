@@ -64,6 +64,7 @@ const userController = {
       await userData.update({
         last_login: currentDate,
         logins: (userData.logins += 1),
+        power: (userData.power += 10),
       });
 
       await userData.save();
@@ -75,6 +76,7 @@ const userController = {
         req.session.last_login = userData.last_login.toDateString();
         req.session.created = userData.created.toDateString();
         req.session.logins = userData.logins;
+        req.session.power = userData.power;
         // if (loginStreak) {
         //   req.session.logins = userData.logins += 1;
         // } else {

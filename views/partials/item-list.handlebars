@@ -1,12 +1,12 @@
 
 {{#each items}}
-<li class="item-card" data-id="{{this.item_id}}">
+<li class="item-card {{this.status}}" data-id="{{this.item_id}}">
     <span class="item-icon">{{this.icon}}</span>
     <div class="item-details">
         <h3 class="item-name">{{this.item}}</h3>
         {{!-- <p class="add-date">Added: {{formatDate add_date}}</p> --}}
         <p class="item-date">Expires: {{formatDate exp_date}}</p>
     </div>
-    <a href="" class="button is-warning">Remove</a>
+    <a href="" id="remove-btn" class="button is-warning">Remove</a>
 </li>
 {{/each}}
