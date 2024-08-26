@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="column">
-                <div class="box">
+                <div class="box" id="users-pantry">
                     <h2 class="title is-4">Your Items</h2>
                     <ul id="items-list" class="items-list">
                         {{#if items}}
@@ -108,6 +108,7 @@
 
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
+<script src="https://unpkg.com/tippy.js@6/plugins/followCursor.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         tippy('#expiration-date', {
@@ -155,7 +156,7 @@
     interactive: true,
     theme: 'light',
     });
-    tippy('#remove-btn', {
+    tippy('#users-pantry', {
             content: 'Score! 10 Pantry Power!',
             animateFill: true,
             trigger: 'click',
