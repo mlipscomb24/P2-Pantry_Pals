@@ -1,4 +1,5 @@
-# Expiration Help
+# Pantry Pals
+
 ## Description
 Pantry Pals is a web application designed to assist users in tracking the expiration dates of their food items. This project aims to reduce food waste by helping users manage their pantry and refrigerator contents more effectively.
 
@@ -27,8 +28,9 @@ Pantry Pals is a web application designed to assist users in tracking the expira
 - Express.js
 - PostgreSQL
 - Sequelize ORM
-- React (assuming frontend is built with React)
-- JWT for authentication
+- DiceBear
+- tippy.js
+- handlebar.js
 - Render for deployment
 
 ## Installation
@@ -41,9 +43,9 @@ Pantry Pals is a web application designed to assist users in tracking the expira
 ## Usage
 To use the application locally:
 1. Start the server with `npm start`
-2. Access the application through your web browser at `http://localhost:3000` (or whatever port you've configured)
+2. Access the application through your web browser at `http://localhost:3000` (port will be provided once you run the application)
 
-For the deployed version, visit: https://p2-expiration-help.onrender.com/dashboard
+
 
 ## API Endpoints
 
