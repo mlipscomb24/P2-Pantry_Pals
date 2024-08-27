@@ -77,11 +77,6 @@ const userController = {
         req.session.created = userData.created.toDateString();
         req.session.logins = userData.logins;
         req.session.power = userData.power;
-        // if (loginStreak) {
-        //   req.session.logins = userData.logins += 1;
-        // } else {
-        //   req.session.logins = userData.logins;
-        // }
         res.json({
           user: userData,
           message: 'You are now logged in!',
