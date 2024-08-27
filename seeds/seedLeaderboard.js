@@ -7,7 +7,7 @@ const seedIt = async () => {
     console.log('Database synced and cleared');
 
     await seedLeaderboard();
-    console.log('Tips seeded successfully');
+    console.log('Leaderboard seeded successfully');
 
     process.exit(0);
   } catch (err) {
