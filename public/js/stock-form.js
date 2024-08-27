@@ -149,23 +149,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-// const firstLoginOfDay = function(currentDate, lastLoginDate) {
-//   const differenceCalc = currentDate - userData.last_login;
-//   const hoursLastLogin = differenceCalc / (1000 * 60 * 60);
-//   if (hoursLastLogin >= 24 && hoursLastLogin < 48) {
-//     return true;
-//   }
-//   return false;
-// };
-
-// tips array
-// Math.floor Math.random
-
-// button to dismiss
-// power + pointValue * loginStreak
-
-// eligibleForPts
-// if item
-//  calcDifference currentDate - add_date >= 24 && exp_date > currentDate
-//  eligibleForPts = true;
