@@ -10,7 +10,6 @@ Pantry Pals is a web application designed to assist users in tracking the expira
 * [API Endpoints](#api-endpoints)
 * [License](#license)
 * [Contributing](#contributing)
-* [Tests](#tests)
 * [Questions](#questions)
 * [Deployment](#deployment)
 * [Future Enhancements](#future-enhancements)
@@ -59,13 +58,21 @@ NA License
 ## Contributing
 We are not currently accepting contributions to this project.
 
-## Tests
-(Add information about any tests you've implemented for your project)
 
 ## Questions
-If you have any questions, please feel free to contact me:
-* GitHub: [mlipscomb24](https://github.com/mlipscomb24)
-* Email: mbennett.sa@outlook.com
+
+Please feel free to reach out to our collaborators.
+
+## Collaborators
+
+This project is a collaborative effort. Our team members are:
+
+- [jknowles10](https://github.com/jknowles10)
+- [daniels-pancakes](https://github.com/daniels-pancakes)
+- [mlipscomb24](https://github.com/mlipscomb24)
+
+We appreciate the hard work and contributions of all team members in making this project possible.
+
 
 ## Deployment
 This application is deployed on Render. You can access it at:
