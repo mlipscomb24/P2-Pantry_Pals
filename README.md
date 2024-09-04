@@ -45,6 +45,14 @@ To use the application locally:
 1. Start the server with `npm start`
 2. Access the application through your web browser at `http://localhost:3000` (port will be provided once you run the application)
 
+## Screenshots
+![Landing Page](./public/assets/pp1.png)
+![Sign up Page](./public/assets/pp2.png)
+![Add item](./public/assets/pp3.png)
+![Dashboard with items](./public/assets/pp4.png)
+![Items expiration](./public/assets/pp5.png)
+![Leaderboard](./public/assets/pp6.png)
+
 
 
 ## API Endpoints
